@@ -42,18 +42,24 @@ plt.savefig("1-1.png")
 
 # bulb 
 
-voltage = np.array([4.02, 4.95, 6.01, 7.04, 8.02, 8.99, 10.03, 11.04])
-current = np.array([109.02,124.69,137.79, 150.87, 161.86, 173.40, 183.55, 193.57])
+voltage = np.array([1.01,1.96, 2.97,4.02, 4.95, 6.01, 7.04, 8.02, 8.99, 10.03, 11.04])
+current = np.array([52.64, 76.92,96.77,112.84,124.69,137.79, 150.87, 161.86, 173.40, 183.55, 193.57])
 current = current * 10**(-3)
 fig, ax = plt.subplots(figsize = (9,9))
 
-ax.scatter(current, voltage, s=60, alpha = 0.7, edgecolors = "k")
+ax.scatter(voltage, current, s=60, alpha = 0.7, edgecolors = "k")
 
-b, a = np.polyfit(current, voltage, deg=1)
+b, a = np.polyfit(voltage, current, deg=1)
 
-xseq = np.linspace(100*10**-3, 200*10**-3, num=100)
+xseq = np.linspace(0, 12, num=100)
 
-ax.plot(xseq, a+b*xseq, color="k", lw = 2.5)
+ax.plot(xseq, a+b*xseq, color="k", lw = 2.5, label = "resistance(1/b)= "+str(1/b))
+print(1/b)
+ax.set_xlabel("voltage (V)")
+ax.set_ylabel("current (A)")
+ax.set_title("Lamp Voltage vs Current plot")
+plt.legend()
+plt.savefig("1-2 lamp.png")
 
 # diode
 voltage = np.array([7, 6.92, 6.84, 6.76, 6.71, 6.66, 6.61, 6.57])
